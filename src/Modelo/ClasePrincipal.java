@@ -4,29 +4,19 @@ public class ClasePrincipal {
     
     public static boolean esSeguro(int[][] tablero,int fila, int columna,int num) 
     { 
-        // fila has the unique (fila-clash) 
+
         for (int d = 0; d < tablero.length; d++) { 
-            // si el número que estamos intentando
-             // el lugar ya está presente en
-             // que fila, devuelve falso;
             if (tablero[fila][d] == num) { 
                 return false; 
             } 
         } 
-  
-        // columnaumn has the unique numbers (columnaumn-clash) 
-        for (int r = 0; r < tablero.length; r++) { 
-            // if the number we are trying to 
-            // place is already present in 
-            // that columnaumn, return false; 
-  
+ 
+        for (int r = 0; r < tablero.length; r++) {   
             if (tablero[r][columna] == num) { 
                 return false; 
             } 
         } 
   
-        // corresponding square has 
-        // unique number (box-clash) 
         int sqrt = (int)Math.sqrt(tablero.length); 
         int inicioFila = fila - fila % sqrt; 
         int inicioColumna = columna - columna % sqrt; 
@@ -56,8 +46,6 @@ public class ClasePrincipal {
                     fila = i; 
                     columna = j; 
   
-                    // todavía nos queda algo
-                    // valores perdidos en sudoku 
                     esVacia = false; 
                     break; 
                 } 
@@ -67,21 +55,17 @@ public class ClasePrincipal {
             } 
         } 
   
-        // no queda espacio vacío
         if (esVacia) { 
             return true; 
         } 
   
-        // else for each-fila backtrack 
         for (int num = 1; num <= n; num++) { 
             if (esSeguro(tablero, fila, columna, num)) { 
                 tablero[fila][columna] = num; 
                 if (resuelveSudoku(tablero, n)) { 
-                    // print(tablero, n); 
                     return true; 
                 } 
                 else { 
-                    // se reemplaza
                     tablero[fila][columna] = 0; 
                 } 
             } 
@@ -92,7 +76,6 @@ public class ClasePrincipal {
     public static void print( 
         int[][] tablero, int N) 
     { 
-        // tenemos la respuesta, solo la imprimimos
         for (int r = 0; r < N; r++) { 
             for (int d = 0; d < N; d++) { 
                 System.out.print(tablero[r][d]); 
